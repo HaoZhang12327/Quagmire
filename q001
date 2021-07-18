@@ -1,0 +1,1105 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define EINS '#'
+#define ZWEI '@'
+#define DREI '%'
+#define VIER '$'
+#define FUENF '?'
+#define SECHS '!'
+#define SIEBEN '&'
+
+void encode(void); 
+void decode(void);
+void fpc(int); // fputchar 1=EINS...
+void fpc_set5(int,int,int,int,int);
+void fpc_set6(int,int,int,int,int,int);
+void fpc_set7(int,int,int,int,int,int,int);
+void fpc_set8(int,int,int,int,int,int,int,int);
+void fpc_set9(int,int,int,int,int,int,int,int,int);
+void fpc_set10(int,int,int,int,int,int,int,int,int,int);
+void fpc_set11(int,int,int,int,int,int,int,int,int,int,int);
+void fpc_set12(int,int,int,int,int,int,int,int,int,int,int,int);
+void fpc_set13(int,int,int,int,int,int,int,int,int,int,int,int,int);
+void fpc_set14(int,int,int,int,int,int,int,int,int,int,int,int,int,int);
+void fpc_set15(int,int,int,int,int,int,int,int,int,int,int,int,int,int,int);
+void fpc_set16(int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int);
+
+FILE* fi;
+FILE* fo;
+
+int main()
+{
+	char input[128];
+	char input1[128]={"1"};
+	char input2[128]={"2"};
+	int i;
+	system("color 0A");
+
+begin:
+
+	printf("1---Encode\n2---Decode\n>>> ");
+	scanf("%s",input);
+	i=strcmp(input, input1);
+
+	if (!i)
+	{
+		system("cls");
+		encode();
+	}
+
+	else
+	{
+		i=strcmp(input,input2);
+
+		if(!i)
+		{
+			system("cls");
+			decode();
+		}
+
+		else
+		{
+			system("cls");
+			printf("Input error!\n");
+			system("Sleep(1000)");
+			system("cls");
+			goto begin;
+		}
+	}
+
+
+	return 0;
+}
+
+void encode(void)
+{
+	char input_file[128];
+	char output_file[128];
+	char c;
+
+	printf("Input file: ");
+	scanf("%s",input_file);
+	printf("Output file: ");
+	scanf("%s",output_file);
+
+	fi=fopen(input_file,"r");
+	fo=fopen(output_file,"w");
+
+	while ((c = getc(fi)) != EOF)
+	{
+		if (c == 'E')
+			fputc(EINS, fo);
+
+		else if (c == 'e')
+			fputc(ZWEI, fo);
+
+		else if (c == 'T')
+			fputc(DREI, fo);
+
+		else if (c == 't')
+			fputc(FUENF, fo);
+
+		else if (c == 'A')
+			fputc(SECHS, fo);
+
+		else if (c == 'a')
+			fputc(SIEBEN, fo);
+
+		else if (c == 'O')
+		{
+			fputc(VIER, fo);
+			fputc(EINS, fo);
+		}
+
+		else if (c == 'o')
+		{
+			fputc(VIER, fo);
+			fputc(DREI, fo);
+		}
+
+		else if (c == 'N')
+		{
+			fputc(VIER, fo);
+			fputc(VIER, fo);
+		}
+
+		else if (c == 'n')
+		{
+			fputc(VIER, fo);
+			fputc(FUENF, fo);
+		}
+
+		else if (c == 'R')
+		{
+			fputc(VIER, fo);
+			fputc(SECHS, fo);
+		}
+
+		else if (c == 'r')
+		{
+			fputc(VIER, fo);
+			fputc(SIEBEN, fo);
+		}
+
+		else if (c == 'I')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(EINS, fo);
+		}
+
+		else if (c == 'i')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(ZWEI, fo);
+		}
+
+		else if (c == 'S')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(VIER, fo);
+		}
+
+		else if (c == 's')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(FUENF, fo);
+		}
+
+		else if (c == 'H')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(SECHS, fo);
+		}
+
+		else if (c == 'h')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(SIEBEN, fo);
+		}
+
+		else if (c == 'D')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(DREI, fo);
+			fputc(EINS, fo);
+		}
+
+		else if (c == 'd')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(DREI, fo);
+			fputc(ZWEI, fo);
+		}
+
+		else if (c == 'L')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(DREI, fo);
+			fputc(DREI, fo);
+		}
+
+		else if (c == 'l')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(DREI, fo);
+			fputc(VIER, fo);
+		}
+
+		else if (c == 'F')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(DREI, fo);
+			fputc(SECHS, fo);
+		}
+
+		else if (c == 'f')
+		{
+			fputc(VIER, fo);
+			fputc(ZWEI, fo);
+			fputc(DREI, fo);
+			fputc(SIEBEN, fo);
+		}
+
+		else if (c == 'C')
+			fpc_set5(4, 2, 3, 5, 1);
+
+		else if (c == 'c')
+			fpc_set5(4, 2, 3, 5, 2);
+
+		else if (c == 'M')
+			fpc_set5(4, 2, 3, 5, 3);
+
+		else if (c == 'm')
+			fpc_set5(4, 2, 3, 5, 4);
+
+		else if (c == 'U')
+			fpc_set5(4, 2, 3, 5, 5);
+
+		else if (c == 'u')
+			fpc_set5(4, 2, 3, 5, 6);
+
+		else if (c == 'G')
+			fpc_set6(4, 2, 3, 5, 7, 2);
+
+		else if (c == 'g')
+			fpc_set6(4, 2, 3, 5, 7, 3);
+
+		else if (c == 'Y')
+			fpc_set6(4, 2, 3, 5, 7, 4);
+
+		else if (c == 'y')
+			fpc_set6(4, 2, 3, 5, 7, 5);
+
+		else if (c == 'P')
+			fpc_set6(4, 2, 3, 5, 7, 6);
+
+		else if (c == 'p')
+			fpc_set6(4, 2, 3, 5, 7, 7);
+
+		else if (c == 'W')
+			fpc_set7(4, 2, 3, 5, 7, 1, 1);
+
+		else if (c == 'w')
+			fpc_set7(4, 2, 3, 5, 7, 1, 2);
+
+		else if (c == 'B')
+			fpc_set7(4, 2, 3, 5, 7, 1, 3);
+
+		else if (c == 'b')
+			fpc_set7(4, 2, 3, 5, 7, 1, 4);
+
+		else if (c == 'V')
+			fpc_set7(4, 2, 3, 5, 7, 1, 5);
+
+		else if (c == 'v')
+			fpc_set7(4, 2, 3, 5, 7, 1, 7);
+
+		else if (c == 'K')
+			fpc_set8(4, 2, 3, 5, 7, 1, 6, 2);
+
+		else if (c == 'k')
+			fpc_set8(4, 2, 3, 5, 7, 1, 6, 3);
+
+		else if (c == 'J')
+			fpc_set8(4, 2, 3, 5, 7, 1, 6, 4);
+
+		else if (c == 'j')
+			fpc_set8(4, 2, 3, 5, 7, 1, 6, 5);
+
+		else if (c == 'X')
+			fpc_set8(4, 2, 3, 5, 7, 1, 6, 6);
+
+		else if (c == 'x')
+			fpc_set8(4, 2, 3, 5, 7, 1, 6, 7);
+
+		else if (c == 'Q')
+			fpc_set9(4, 2, 3, 5, 7, 1, 6, 1, 1);
+
+		else if (c == 'q')
+			fpc_set9(4, 2, 3, 5, 7, 1, 6, 1, 2);
+
+		else if (c == 'Z')
+			fpc_set9(4, 2, 3, 5, 7, 1, 6, 1, 4);
+
+		else if (c == 'z')
+			fpc_set9(4, 2, 3, 5, 7, 1, 6, 1, 5);
+
+		else if (c == ' ')
+			fpc_set9(4, 2, 3, 5, 7, 1, 6, 1, 6);
+
+		else if (c == '!')
+			fpc_set9(4, 2, 3, 5, 7, 1, 6, 1, 7);
+
+		else if (c == '"')
+			fpc_set10(4, 2, 3, 5, 7, 1, 6, 1, 3, 1);
+
+		else if (c == '#')
+			fpc_set10(4, 2, 3, 5, 7, 1, 6, 1, 3, 3);
+
+		else if (c == '$')
+			fpc_set10(4, 2, 3, 5, 7, 1, 6, 1, 3, 4);
+
+		else if (c == '%')
+			fpc_set10(4, 2, 3, 5, 7, 1, 6, 1, 3, 5);
+
+		else if (c == '&')
+			fpc_set10(4, 2, 3, 5, 7, 1, 6, 1, 3, 6);
+
+		else if (c == '\'')
+			fpc_set10(4, 2, 3, 5, 7, 1, 6, 1, 3, 7);
+
+		else if (c == '(')
+			fpc_set11(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 1);
+
+		else if (c == ')')
+			fpc_set11(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 2);
+
+		else if (c == '*')
+			fpc_set11(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 3);
+
+		else if (c == '+')
+			fpc_set11(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 4);
+
+		else if (c == ',')
+			fpc_set11(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 6);
+
+		else if (c == '-')
+			fpc_set11(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 7);
+
+		else if (c == '.')
+			fpc_set12(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 1);
+
+		else if (c == '/')
+			fpc_set12(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 2);
+
+		else if (c == '0')
+			fpc_set12(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 3);
+
+		else if (c == '1')
+			fpc_set12(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 5);
+
+		else if (c == '2')
+			fpc_set12(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 6);
+
+		else if (c == '3')
+			fpc_set12(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 7);
+
+		else if (c == '4')
+			fpc_set13(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 1);
+
+		else if (c == '5')
+			fpc_set13(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 3);
+
+		else if (c == '6')
+			fpc_set13(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 4);
+
+		else if (c == '7')
+			fpc_set13(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 5);
+
+		else if (c == '8')
+			fpc_set13(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 6);
+
+		else if (c == '9')
+			fpc_set13(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 7);
+
+		else if (c == ':')
+			fpc_set14(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 1);
+
+		else if (c == ';')
+			fpc_set14(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 2);
+
+		else if (c == '<')
+			fpc_set14(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 4);
+
+		else if (c == '=')
+			fpc_set14(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 5);
+
+		else if (c == '>')
+			fpc_set14(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 6);
+
+		else if (c == '?')
+			fpc_set14(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 7);
+
+		else if (c == '[')
+			fpc_set15(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 1);
+
+		else if (c == '\\')
+			fpc_set15(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 2);
+
+		else if (c == ']')
+			fpc_set15(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 3);
+
+		else if (c == '^')
+			fpc_set15(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 4);
+
+		else if (c == '_')
+			fpc_set15(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 5);
+
+		else if (c == '`')
+			fpc_set15(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 6);
+
+		else if (c == '{')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 1);
+
+		else if (c == '|')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 2);
+
+		else if (c == '}')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 3);
+
+		else if (c == '~')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 4);
+
+		else if(c=='\n')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 5);
+		
+		else if(c=='\t')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 6);
+
+		else if(c=='@')
+			fpc_set16(4, 2, 3, 5, 7, 1, 6, 1, 3, 2, 5, 4, 2, 3, 7, 7);
+
+}
+
+	fclose(fi);
+	fclose(fo);
+
+	return;
+}
+
+void decode(void)
+{
+	char input_file[128];
+	char output_file[128];
+	char c;
+
+	printf("Input file: ");
+	scanf("%s", input_file);
+	printf("Output file: ");
+	scanf("%s", output_file);
+
+	fi = fopen(input_file, "r");
+	fo = fopen(output_file, "w");
+
+	while ((c = getc(fi)) != EOF)
+	{
+		if (c == EINS)
+			fputc('E', fo);
+
+		else if (c == ZWEI)
+			fputc('e', fo);
+
+		else if (c == DREI)
+			fputc('T', fo);
+
+		else if (c == VIER)
+		{
+			if ((c = getc(fi)) != EOF);
+
+			else
+				goto end;
+
+			if (c == EINS)
+				fputc('O', fo);
+
+			else if (c == ZWEI)
+			{
+				if ((c = getc(fi) )!= EOF);
+					
+				else 
+					goto end;
+
+				if (c == EINS) // 3rd start
+					fputc('I', fo);
+
+				else if (c == ZWEI)
+					fputc('i', fo);
+
+				else if (c == DREI)
+				{
+					if ((c = getc(fi) )!= EOF);
+						
+					else
+						goto end;
+
+					if (c == EINS)
+						fputc('D', fo);
+
+					else if (c == ZWEI)
+						fputc('d', fo);
+
+					else if (c == DREI)
+						fputc('L', fo);
+
+					else if (c == VIER)
+						fputc('l', fo);
+
+					else if (c == FUENF)
+					{
+						if ((c = getc(fi)) != EOF);
+							
+						else
+							goto end;
+
+						if (c == EINS)
+							fputc('C', fo);
+
+						else if (c == ZWEI)
+							fputc('c', fo);
+
+						else if (c == DREI)
+							fputc('M', fo);
+
+						else if (c == VIER)
+							fputc('m', fo);
+
+						else if (c == FUENF)
+							fputc('U', fo);
+
+						else if (c == SECHS)
+							fputc('u', fo);
+
+						else if (c == SIEBEN)
+						{
+							if ((c = getc(fi)) != EOF);
+								
+							else
+								goto end;
+
+							if (c == EINS)
+							{
+								if ((c = getc(fi)) != EOF);
+									
+								else
+									goto end;
+
+								if (c == EINS)
+									fputc('W', fo);
+
+								else if (c == ZWEI)
+									fputc('w', fo);
+
+								else if (c == DREI)
+									fputc('B', fo);
+
+								else if (c == VIER)
+									fputc('b', fo);
+
+								else if (c == FUENF)
+									fputc('V', fo);
+
+								else if (c == SECHS)
+								{
+									if ((c = getc(fi)) != EOF);
+
+									else
+										goto end;
+
+									if (c == EINS)
+									{
+										if ((c = getc(fi)) != EOF);
+											
+										else
+											goto end;
+
+										if (c == EINS)
+											fputc('Q', fo);
+
+										else if (c == ZWEI)
+											fputc('q', fo);
+
+										else if (c == DREI)
+										{
+											if ((c = getc(fi)) != EOF);
+												
+											else
+												goto end;
+
+											if (c == EINS)
+												fputc('"', fo);
+
+											else if (c == ZWEI)
+											{
+												if ((c = getc(fi)) != EOF);
+													
+												else
+													goto end;
+
+												if (c == EINS)
+													fputc('(', fo);
+
+												else if (c == ZWEI)
+													fputc(')', fo);
+
+												else if (c == DREI)
+													fputc('*', fo);
+
+												else if (c == VIER)
+													fputc('+', fo);
+
+												else if (c == FUENF)
+												{
+													if ((c = getc(fi))!= EOF);
+													
+													else
+														goto end;
+
+													if (c == EINS)
+														fputc('.', fo);
+
+													else if (c == ZWEI)
+														fputc('/', fo);
+
+													else if (c == DREI)
+														fputc('0', fo);
+
+													else if (c == VIER)
+													{
+														if ((c = getc(fi)) != EOF);
+															
+														else
+															goto end;
+
+														if (c == EINS) // 12th start
+															fputc('4', fo);
+
+														else if (c == ZWEI)
+														{
+															if ((c = getc(fi)) != EOF);
+																
+															else
+																goto end;
+
+															if (c == EINS)
+																fputc(':', fo);
+
+															else if (c == ZWEI)
+																fputc(';', fo);
+
+															else if (c == DREI)
+															{
+																if ((c = getc(fi)) != EOF);
+																	
+																else
+																	goto end;
+
+																if (c == EINS)
+																	fputc('[', fo);
+
+																else if (c == ZWEI)
+																	fputc('\\', fo);
+
+																else if (c == DREI)
+																	fputc(']', fo);
+
+																else if (c == VIER)
+																	fputc('^', fo);
+
+																else if (c == FUENF)
+																	fputc('_', fo);
+
+																else if (c == SECHS)
+																	fputc('`', fo);
+
+																else if (c == SIEBEN)
+																{
+																	if ((c = getc(fi)) != EOF);
+																		
+																	else
+																		goto end;
+
+																	if (c == EINS)
+																		fputc('{', fo);
+
+																	else if (c == ZWEI)
+																		fputc('|', fo);
+
+																	else if (c == DREI)
+																		fputc('}', fo);
+
+																	else if (c == VIER)
+																		fputc('~', fo); // finish
+
+																	else if (c == FUENF)
+																		fputc('\n', fo);
+
+																	else if (c == SECHS)
+																		fputc('\t', fo);
+
+																	else if (c == SIEBEN)
+																		fputc('@', fo);
+																	
+																}
+															}
+
+															else if (c == VIER)
+																fputc('<', fo);
+
+															else if (c == FUENF)
+																fputc('=', fo);
+
+															else if (c == SECHS)
+																fputc('>', fo);
+
+															else if (c == SIEBEN)
+																fputc('?', fo);
+														}
+
+														else if (c == DREI)
+															fputc('5', fo);
+
+														else if (c == VIER)
+															fputc('6', fo);
+
+														else if (c == FUENF)
+															fputc('7', fo);
+
+														else if (c == SECHS)
+															fputc('8', fo);
+
+														else if (c == SIEBEN)
+															fputc('9', fo);
+													}
+
+													else if (c == FUENF)
+														fputc('1', fo);
+
+													else if (c == SECHS)
+														fputc('2', fo);
+
+													else if (c == SIEBEN)
+														fputc('3', fo);
+												}
+
+												else if (c == SECHS)
+													fputc(',', fo);
+
+												else if (c == SIEBEN)
+													fputc('-', fo);
+											}
+
+											else if (c == DREI)
+												fputc('#', fo);
+
+											else if (c == VIER)
+												fputc('$', fo);
+
+											else if (c == FUENF)
+												fputc('%', fo);
+
+											else if (c == SECHS)
+												fputc('&', fo);
+
+											else if (c == SIEBEN)
+												fputc('\'', fo);
+										}
+
+										else if (c == VIER)
+											fputc('Z', fo);
+
+										else if (c == FUENF)
+											fputc('z', fo);
+
+										else if (c == SECHS)
+											fputc(' ', fo);
+
+										else if (c == SIEBEN)
+											fputc('!', fo);
+									}
+
+									else if (c == ZWEI)
+										fputc('K', fo);
+
+									else if (c == DREI)
+										fputc('k', fo);
+
+									else if (c == VIER)
+										fputc('J', fo);
+
+									else if (c == FUENF)
+										fputc('j', fo);
+
+									else if (c == SECHS)
+										fputc('X', fo);
+
+									else if (c == SIEBEN)
+										fputc('x', fo);
+								}
+
+								else if (c == SIEBEN)
+									fputc('v', fo);
+
+							}
+
+							else if (c == ZWEI)
+								fputc('G', fo);
+
+							else if (c == DREI)
+								fputc('g', fo);
+
+							else if (c == VIER)
+								fputc('Y', fo);
+
+							else if (c == FUENF)
+								fputc('y', fo);
+
+							else if (c == SECHS)
+								fputc('P', fo);
+
+							else if (c == SIEBEN)
+								fputc('p', fo);
+						}
+					}
+
+					else if (c == SECHS)
+						fputc('F', fo);
+
+					else if (c == SIEBEN)
+						fputc('f', fo);
+				}
+
+				else if (c == VIER)
+				fputc('S', fo);
+
+				else if (c == FUENF)
+					fputc('s', fo);
+
+				else if (c == SECHS)
+					fputc('H', fo);
+
+				else if (c == SIEBEN)
+					fputc('h', fo);
+			}
+
+			else if (c == DREI)
+				fputc('o', fo);
+
+			else if (c == VIER)
+				fputc('N', fo);
+
+			else if (c == FUENF)
+				fputc('n', fo);
+
+			else if (c == SECHS)
+				fputc('R', fo);
+
+			else if (c == SIEBEN)
+				fputc('r', fo);
+
+		}
+
+		else if (c == FUENF)
+			fputc('t', fo);
+
+		else if (c == SECHS)
+			fputc('A', fo);
+
+		else if (c == SIEBEN)
+			fputc('a', fo);
+	}
+
+ end:
+	fclose(fi);
+	fclose(fo);
+
+	return;
+}
+
+
+void fpc(int n){
+	if(n==1)
+		fputc(EINS,fo);
+	else if(n==2)
+		fputc(ZWEI,fo);
+	else if(n==3)
+		fputc(DREI,fo);
+	else if(n==4)
+		fputc(VIER,fo);
+	else if(n==5)
+		fputc(FUENF,fo);
+	else if(n==6)
+		fputc(SECHS,fo);
+	else if(n==7)
+		fputc(SIEBEN,fo);
+	else
+		fprintf(fo,"Error: fpc()");
+}
+
+void fpc_set5(int a,int b,int c,int d,int e){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+
+	return;
+}
+
+void fpc_set6(int a,int b,int c,int d,int e,int f){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+
+	return;
+}
+
+void fpc_set7(int a,int b,int c,int d,int e,int f,int g){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+
+	return;
+}
+
+void fpc_set8(int a,int b,int c,int d,int e,int f,int g,int h){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+
+	return;
+}
+
+void fpc_set9(int a,int b,int c,int d,int e,int f,int g,int h,int i){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+
+	return;
+}
+
+void fpc_set10(int a,int b,int c,int d,int e,int f,int g,int h,int i,int j){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+
+	return;
+}
+
+void fpc_set11(int a,int b,int c,int d,int e,int f,int g,int h,int i,int j,int k){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+	fpc(k);
+
+	return;
+}
+
+void fpc_set12(int a,int b,int c,int d,int e,int f,int g,int h,int i,int j,int k,int l){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+	fpc(k);
+	fpc(l);
+
+	return;
+}
+
+void fpc_set13(int a,int b,int c,int d,int e,int f,int g,int h,int i,int j,int k,int l,int m){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+	fpc(k);
+	fpc(l);
+	fpc(m);
+
+	return;
+}
+
+void fpc_set14(int a,int b,int c,int d,int e,int f,int g,int h,int i,int j,int k,int l,int m,int n){
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+	fpc(k);
+	fpc(l);
+	fpc(m);
+	fpc(n);
+
+	return;
+}
+
+void fpc_set15(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l, int m, int n, int o) {
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+	fpc(k);
+	fpc(l);
+	fpc(m);
+	fpc(n);
+	fpc(o);
+
+	return;
+}
+
+void fpc_set16(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l, int m, int n, int o,int p) {
+	fpc(a);
+	fpc(b);
+	fpc(c);
+	fpc(d);
+	fpc(e);
+	fpc(f);
+	fpc(g);
+	fpc(h);
+	fpc(i);
+	fpc(j);
+	fpc(k);
+	fpc(l);
+	fpc(m);
+	fpc(n);
+	fpc(o);
+	fpc(p);
+
+	return;
+}
